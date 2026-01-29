@@ -39,6 +39,41 @@
           "detail": "Stop required but not provided"
         }
       ]
+    },
+    {
+      "compliance_score": 0.0,
+      "violations": [
+        {
+          "trade_index": 0,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off / Low/Normal Vol / Downtrend / Healthy Breadth regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off / Low/Normal Vol / Downtrend / Healthy Breadth regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Missing Stop",
+          "detail": "Stop required but not provided"
+        },
+        {
+          "trade_index": 0,
+          "violation_type": "Oversized for Regime",
+          "detail": "Position value $53,000 exceeds 3.0% of account ($3,000) in regime 'Risk-Off / Low/Normal Vol / Downtrend / Healthy Breadth'."
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Oversized for Regime",
+          "detail": "Position value $56,400 exceeds 3.0% of account ($3,000) in regime 'Risk-Off / Low/Normal Vol / Downtrend / Healthy Breadth'."
+        }
+      ],
+      "violation_summary": {
+        "Regime Mismatch": 2,
+        "Missing Stop": 1,
+        "Oversized for Regime": 2
+      }
     }
   ]
 }
