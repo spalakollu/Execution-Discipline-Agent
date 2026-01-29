@@ -1,0 +1,8 @@
+{
+    "risk_per_trade_pct": 0.5,
+    "max_position_pct": 10,
+    "allowed_regimes": ["Risk-On"],
+    "stop_required": true,
+    "max_stop_pct": 2.0
+  }
+  

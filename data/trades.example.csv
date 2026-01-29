@@ -1,0 +1,3 @@
+date,symbol,side,entry_price,exit_price,shares,stop_price
+2025-08-01,SPY,LONG,530,535,100,525
+2025-08-02,QQQ,LONG,470,465,120,

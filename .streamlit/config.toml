@@ -1,0 +1,14 @@
+[server]
+# Increase file upload size limit (default is 200MB)
+maxUploadSize = 200
+maxMessageSize = 200
+
+# Disable XSRF protection to fix 403 errors with file uploader
+enableXsrfProtection = false
+
+# CORS settings - disable for local development
+enableCORS = false
+
+[browser]
+# Automatically open browser
+gatherUsageStats = false

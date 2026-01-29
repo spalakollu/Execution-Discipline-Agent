@@ -1,0 +1,44 @@
+{
+  "history": [
+    {
+      "compliance_score": 0.0,
+      "violations": [
+        {
+          "trade_index": 0,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Missing Stop",
+          "detail": "Stop required but not provided"
+        }
+      ]
+    },
+    {
+      "compliance_score": 0.0,
+      "violations": [
+        {
+          "trade_index": 0,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Regime Mismatch",
+          "detail": "Trade taken during Risk-Off regime"
+        },
+        {
+          "trade_index": 1,
+          "violation_type": "Missing Stop",
+          "detail": "Stop required but not provided"
+        }
+      ]
+    }
+  ]
+}
