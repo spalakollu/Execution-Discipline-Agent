@@ -12,6 +12,8 @@ class DisciplineReport:
     compliance_score: float
     violations: List[Violation]
     regime_mismatch_rate: float
+    violation_summary: Dict[str, int]
+    compliance_trend: str
 
 def to_dict(obj):
     if hasattr(obj, "__dict__"):

@@ -113,11 +113,16 @@ Your trading plan JSON must include:
 
 ```json
 {
-  "allowed_regimes": ["Risk-On", "Risk-Off"],
-  "stop_required": true,
   "risk_per_trade_pct": 0.5,
   "max_position_pct": 10,
-  "max_stop_pct": 2.0
+  "allowed_regimes": ["Risk-On", "Risk-Off"],
+  "stop_required": true,
+  "max_stop_pct": 2.0,
+  "account_size": 100000,
+  "position_limits_by_regime": {
+    "Risk-On": 10,
+    "Risk-Off": 3
+  }
 }
 ```
 
@@ -129,17 +134,29 @@ Your trading plan JSON must include:
 - `risk_per_trade_pct`: Maximum risk per trade percentage
 - `max_position_pct`: Maximum position size percentage
 - `max_stop_pct`: Maximum stop-loss percentage
+- `account_size` (number): Total account size in dollars (required for position sizing checks)
+- `position_limits_by_regime` (object): Dictionary mapping regime names to maximum position size as percentage of account (e.g., `{"Risk-On": 10}` means max 10% of account per position in Risk-On regime)
 
 **Example:**
 ```json
 {
   "risk_per_trade_pct": 0.5,
   "max_position_pct": 10,
-  "allowed_regimes": ["Risk-On"],
+  "allowed_regimes": ["Risk-On", "Risk-Off"],
   "stop_required": true,
-  "max_stop_pct": 2.0
+  "max_stop_pct": 2.0,
+  "account_size": 100000,
+  "position_limits_by_regime": {
+    "Risk-On": 10,
+    "Risk-Off": 3
+  }
 }
 ```
+
+**Position Sizing Rule:**
+- Position size is calculated as `shares × entry_price`
+- If `position_limits_by_regime` and `account_size` are provided, the agent will check each trade against the regime-specific limit
+- Violations are flagged when position size exceeds the allowed percentage for the current regime
 
 ### 🏷️ Market Regime Label
 
@@ -172,7 +189,15 @@ Each violation includes:
 - **Violation Type**: 
   - `Regime Mismatch` — Trade executed in non-allowed regime
   - `Missing Stop` — Required stop-loss not provided
+  - `Oversized for Regime` — Position size exceeds regime-specific limit
+  - `Early Exit` — Exited trade with R < 0.5 (didn't let trade run to target)
+  - `Late Exit` — Hit stop loss after trade likely had >= 1R unrealized gain (should have exited earlier)
 - **Detail**: Human-readable explanation
+
+**R-Multiple Calculation:**
+- R-multiple measures trade performance relative to risk: `R = (exit_price - entry_price) / (entry_price - stop_price)`
+- Only calculated for trades with valid `stop_price`
+- Supports both LONG and SHORT positions
 
 ---
 
@@ -199,6 +224,8 @@ Execution-Discipline-Agent/
 - **`ExecutionDisciplineAgent`**: Main agent class that orchestrates compliance checking
 - **`check_regime_allowed()`**: Validates trades against allowed regimes
 - **`check_missing_stops()`**: Ensures stop-loss orders are present when required
+- **`check_position_sizing()`**: Validates position sizes against regime-specific limits
+- **`check_r_multiple()`**: Calculates R-multiples and flags Early Exit and Late Exit violations
 - **Memory System**: Tracks compliance history in `state/memory.json`
 
 ---

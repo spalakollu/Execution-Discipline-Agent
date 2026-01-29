@@ -1,8 +1,13 @@
 {
     "risk_per_trade_pct": 0.5,
     "max_position_pct": 10,
-    "allowed_regimes": ["Risk-On"],
+    "allowed_regimes": ["Risk-On", "Risk-Off"],
     "stop_required": true,
-    "max_stop_pct": 2.0
-  }
+    "max_stop_pct": 2.0,
+    "account_size": 100000,
+    "position_limits_by_regime": {
+        "Risk-On": 10,
+        "Risk-Off": 3
+    }
+}
   
